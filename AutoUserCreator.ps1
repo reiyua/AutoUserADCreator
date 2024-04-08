@@ -1,24 +1,27 @@
-# Copyright 2024 Rayyan Hodges, TAFE NSW, AlphaDelta
+# Copyright 2024 Rayyan Hodges, M Salim Olime, TAFE NSW, AlphaDelta
 # Contact: rayyan.hodges@studytafensw.edu.au
 # Program Name: AutoUserCreator
 # Purpose of script: Create a batch set of user's using a CSV file containing a list of predetermined users.
+#Other notes: Orginally created by M Salim Olime, my teacher as part of our class with my assigned modification of creating batch OU's within the script.
 
-# Import required PowerShell Modules
-Import-Module ActiveDirectory
+# Import required PowerShell modules
+import-module ActiveDirectory
+#Specify User Principal Name (Active Directory Domain Forest Name)
+$UPN = "alphadelta.com"
+#Get user to specify path of the CSV file containing user info to be added into the Active Directory.
+$fpath = Read-Host -Prompt "Please enter the path to your CSV file:"
+echo $fpath
+$fusers = Import-Csv $fpath
+#Set tempoary password to "Pa$$w0rd1" which the user will be required to change when they first login.
+$fsecPass = ConvertTo-SecureString -AsPlainText "Pa$$w0rd1" -Force
 
-# Define temporary password which MUST be changed when the user first logs into the Active Directory.
-$SecurePass = ConvertTo-SecureString -AsPlainText "Mypassword1" -Force
 
-# Define the file path where the CSV file containing users is.
-$csvfilepath = Read-Host - Prompt "Please enter the location of the CSV file containing the user list"
-
-# Define variables for various columns within CSV file.
-ForEach ($user in $users) {
-$fname = $user.'First Name’
-$lname = $user.'Last Name'
-$jtitle = $user.'Job Title'
-$OUpath = $user.'Organizational Unit' #Example entry: OU=Staff,OU=Manager,DC=alphadelta,DC=com
-
-# Command to add user's to Active Directory.
-New-ADUser -Name $fname -UserPrincipalName "$fname.$lname"
-}
+# Create user within already created OU
+ForEach ($user in $fusers) {
+    $fname = $user.fName
+    $lname = $user.lName
+    $jtitle = $user.jTitle
+    $OUpath = $user.OU
+    echo $fname $lname $jtitle $OUpath
+    New-ADUser -SamAccountName = $fname.$lname -UserPrincipalName "$fname@alphadelta.com" -Path $OUpath -AccountPassword $fsecPass -Enabled $true -PassThru
+    }
