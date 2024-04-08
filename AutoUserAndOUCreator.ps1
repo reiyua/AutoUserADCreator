@@ -1,7 +1,7 @@
 # Copyright 2024 Rayyan Hodges, M Salim Olime, TAFE NSW, AlphaDelta
 # Contact: rayyan.hodges@studytafensw.edu.au, mohammad.olime1@tafensw.edu.au
 # Program Name: AutoUserAndOUCreator
-# Purpose of script: Create a batch set of user's using a CSV file containing a list of predetermined users.
+# Purpose of script: Create a batch set of user's and OU's using a CSV file containing a list of predetermined users and OU's.
 # Other notes: Orginally created by M Salim Olime (Salim), my teacher as part of our class with my assigned modification of creating batch OU's within the script.
 
 # Import required PowerShell modules
