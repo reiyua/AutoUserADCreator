@@ -42,6 +42,7 @@ ForEach ($user in $fusers) {
     }
 
        # Check if user already exists within OU. Skip if so with message stating so. (RAYYAN Contribution)
+       # Source for code (https://morgantechspace.com/2016/11/check-if-ad-user-exists-with-powershell.html)
     if (Get-ADUser -Filter "SamAccountName -eq '$fname.$lname'") {
         Write-Host "User $fname.$lname already exists. Skipping."
     } else {
