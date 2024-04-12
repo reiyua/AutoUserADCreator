@@ -15,6 +15,8 @@ $fpath = Read-Host -Prompt "Please enter the path to your CSV file:"
 
 # Check if CSV file exists with the path specified by the end-user
 # If so, error out the program with generic error stating so. (RAYYAN Contribution)
+# This uses the "Test-Path" cmdlet which tests if the path actually exists and can be read by the system.
+# Source for code (https://www.itechguides.com/powershell-check-if-file-exists/#:~:text=If%20(Test%2DPath%20%2DPath%20E%3A%5Creports%5Cprocesses.txt%20)%20%7B%0ACopy%2DItem%20%2DPath%20E%3A%5Creports%5Cprocesses.txt%20%2DDestination%20C%3A%5Creports%0A%7D)
 if (-not (Test-Path $fpath)) {
     Write-Host "CSV file does not exist. Exiting script."
     exit
