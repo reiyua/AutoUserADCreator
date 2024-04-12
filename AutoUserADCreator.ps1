@@ -8,9 +8,6 @@
 # Import required PowerShell modules
 import-module ActiveDirectory
 
-#Specify User Principal Name (Active Directory Domain Forest Name) (Rayyan Modified to allow for user to enter their own forest name)
-$UPN = Read-Host -Prompt "Please enter the Active Directory Forest name (example.com)"
-
 #Get user to specify path of the CSV file containing user info to be added into the Active Directory.
 $fpath = Read-Host -Prompt "Please enter the path to your CSV file containing user info to be added to the OU's within the Active Directory Domain Forest:"
 
@@ -37,22 +34,25 @@ ForEach ($user in $fusers) {
     $fname = $user.fName
     $lname = $user.lName
     $jtitle = $user.jTitle
-    $OUpath = $user.OU
+    $OUpath = $user.OuPath
     echo $fname $lname $jtitle $OUpath
-    New-ADUser -SamAccountName = $fname.$lname -UserPrincipalName "$fname@alphadelta.com" -Path $OUpath -AccountPassword $fsecPass -Enabled $true -PassThru
-    }
 
        # Check if user already exists within OU. Skip if so with message stating so. (RAYYAN Contribution)
        # Source for code (https://morgantechspace.com/2016/11/check-if-ad-user-exists-with-powershell.html)
-    if (Get-ADUser -Filter "SamAccountName -eq '$fname.$lname'") {
-        Write-Host "User $fname.$lname already exists. Skipping."
+    if (Get-ADUser -Filter "SamAccountName -eq '$fname$lname'") {
+        Write-Host "User $fname$lname already exists. Skipping."
     } else {
-        New-ADUser -SamAccountName "$fname.$lname" -UserPrincipalName "$fname@$UPN" -Path $OUpath -AccountPassword $fsecPass -Enabled $true -PassThru
+    # Construct the full name for user
+    $fullName = "$fname $lname"
+    # Create the user with full name now defined
+    new-ADUser -Name $fullName -SamAccountName ($fname + $lname) -UserPrincipalName "$fname@PSTest.local" -Path $OUpath -AccountPassword $fsecPass -Enabled $true -PassThru
     }
-}
+    }
+
 
 # Print message stating the program has completed succsessfully, and to prompt them to press any key to close the program. (RAYYAN Contribution)
 # Source for code (https://www.thomasmaurer.ch/2021/01/how-to-add-sleep-wait-pause-in-a-powershell-script/#:~:text=Read%2DHost%20%2DPrompt%20%22Press%20any%20key%20to%20continue...%22)
 
 Read-Host -Prompt "User creation completed, press any key to close the window."
 
+` 
