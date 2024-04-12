@@ -12,7 +12,7 @@ import-module ActiveDirectory
 $UPN = Read-Host -Prompt "Please enter the Active Directory Forest name (example.com)"
 
 #Get user to specify path of the CSV file containing user info to be added into the Active Directory.
-$fpath = Read-Host -Prompt "Please enter the path to your CSV file:"
+$fpath = Read-Host -Prompt "Please enter the path to your CSV file containing user info to be added to the OU's within the Active Directory Domain Forest:"
 
 # Check if CSV file exists with the path specified by the end-user
 # If so, error out the program with generic error stating so. (RAYYAN Contribution)
