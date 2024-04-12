@@ -3,6 +3,7 @@
 # Program Name: AutoUserAndOUCreator
 # Purpose of script: Create a batch set of user's within an existing OU using a CSV file containing a list of predetermined users and OU's.
 # Other Notes: My job is to create simple checks to avoid issues such as duplicate users.
+# Other Notes: Credit is given for parts I have contributed to the script.
 
 # Import required PowerShell modules
 import-module ActiveDirectory
