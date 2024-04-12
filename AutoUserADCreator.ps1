@@ -47,7 +47,8 @@ ForEach ($user in $fusers) {
     }
 }
 
-#Print message stating the program has completed succsessfully, and to prompt them to press any key to close the program. (RAYYAN Contribution)
+# Print message stating the program has completed succsessfully, and to prompt them to press any key to close the program. (RAYYAN Contribution)
+# Source for code (https://www.thomasmaurer.ch/2021/01/how-to-add-sleep-wait-pause-in-a-powershell-script/#:~:text=Read%2DHost%20%2DPrompt%20%22Press%20any%20key%20to%20continue...%22)
 
 Read-Host -Prompt "User creation completed, press any key to close the window."
 
