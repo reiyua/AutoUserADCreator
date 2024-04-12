@@ -8,8 +8,8 @@
 # Import required PowerShell modules
 import-module ActiveDirectory
 
-#Specify User Principal Name (Active Directory Domain Forest Name)
-$UPN = "alphadelta.com"
+#Specify User Principal Name (Active Directory Domain Forest Name) (Rayyan Modified to allow for user to enter their own forest name)
+$UPN = Read-Host -Prompt "Please enter the Active Directory Forest name (example.com)"
 
 #Get user to specify path of the CSV file containing user info to be added into the Active Directory.
 $fpath = Read-Host -Prompt "Please enter the path to your CSV file:"
