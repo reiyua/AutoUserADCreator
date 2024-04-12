@@ -1,8 +1,7 @@
 # Copyright 2024 Rayyan Hodges, M Salim Olime, TAFE NSW, AlphaDelta
 # Contact: rayyan.hodges@studytafensw.edu.au, mohammad.olime1@tafensw.edu.au
 # Program Name: AutoUserAndOUCreator
-# Purpose of script: Create a batch set of user's and OU's using a CSV file containing a list of predetermined users and OU's.
-# Other notes: Orginally created by M Salim Olime (Salim), my teacher as part of our class with my assigned modification of creating batch OU's within the script.
+# Purpose of script: Create a batch set of user's within an existing OU using a CSV file containing a list of predetermined users and OU's.
 
 # Import required PowerShell modules
 import-module ActiveDirectory
@@ -15,12 +14,6 @@ $fusers = Import-Csv $fpath
 #Set tempoary password to "Pa$$w0rd1" which the user will be required to change when they first login.
 $fsecPass = ConvertTo-SecureString -AsPlainText "Pa$$w0rd1" -Force
 
-# Create OU's to be placed in Active Directory (My contribution)
-foreach ($ou in $fous) {
-    $name = $ou.OuName
-    $path = $ou.OuPath
-    New-ADOrganizationalUnit -Name $name -Path $path
-}
 
 # Create user within already created OU
 ForEach ($user in $fusers) {
