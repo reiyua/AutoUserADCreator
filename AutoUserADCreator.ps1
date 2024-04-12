@@ -1,6 +1,6 @@
 # Copyright 2024 Rayyan Hodges, M Salim Olime, TAFE NSW, AlphaDelta
 # Contact: rayyan.hodges@studytafensw.edu.au, mohammad.olime1@tafensw.edu.au
-# Program Name: AutoUserAndOUCreator
+# Program Name: AutoUserADCreator
 # Purpose of script: Create a batch set of user's within an existing OU using a CSV file containing a list of predetermined users and OU's.
 # Other Notes: My job is to create simple checks to avoid issues such as duplicate users.
 # Other Notes: Credit is given for parts I have contributed to the script.
